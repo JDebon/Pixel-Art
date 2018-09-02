@@ -122,6 +122,7 @@ var nombreColores = [
 ];
 var paleta = $('#paleta')[0];
 var grillaPixeles = $('#grilla-pixeles')[0];
+var click = false;
 // Variable para guardar el elemento 'color-personalizado, Es decir, el que se elige con la rueda de color.
 var colorPersonalizado = document.getElementById('color-personalizado');
 
@@ -131,13 +132,13 @@ function init() {
     generarPaleta();
     generarGrilla();
     detectarcCambioColor();
-    detectarPintarPixel();
+    eventosPixeles();
 }
 
 colorPersonalizado.addEventListener('change', function() {
     // Se guarda el color de la rueda en colorActual
     colorActual = colorPersonalizado.value;
-    // Completar para que cambie el indicador-de-color al colorActual
+    $('#indicador-de-color').css('background-color', colorActual);
 });
 
 function generarPaleta() {
@@ -154,6 +155,20 @@ function generarGrilla() {
         var pixel = $('<div>').appendTo('#grilla-pixeles');
     }
 }
+function eventosPixeles() {
+    $('#grilla-pixeles div').on('mouseup', detectarClick);
+    $('#grilla-pixeles div').on('mousedowm', detectarClick);
+    $('#grilla-pixeles div').on('click', PintarPixel);
+}
+
+function detectarClick() {
+    //TODO: RESOLVER SI PUEDO, CON UNA SOLA FUNCION, LOGRAR DETECTAR EL MOUSEUP Y EL MOUSEDOWN
+    console.log(this.onmouseup);
+    /* if (this.onmousedown) {
+        click = true;
+        console.log(click);
+    } */
+}
 
 function detectarcCambioColor() {
     $('#paleta div').on('click', cambiarColor);
@@ -164,11 +179,8 @@ function cambiarColor() {
     $('#indicador-de-color').css('background-color', colorAhora);
 }
 
-function detectarPintarPixel() {
-    $('#grilla-pixeles div').on('click', PintarPixel);
-}
-
 function PintarPixel() {
+    //CAMBIAR NOMBRE VARIABLE COLORAHORA2
     var colorAhora2 = $('#indicador-de-color').css('background-color');
     $(this).css('background-color', colorAhora2);
 }
