@@ -157,19 +157,38 @@ function generarGrilla() {
 }
 function eventosPixeles() {
     $('#grilla-pixeles div').on('mouseup', detectarClick);
-    $('#grilla-pixeles div').on('mousedowm', detectarClick);
-    $('#grilla-pixeles div').on('click', PintarPixel);
+    $('#grilla-pixeles div').on('mousedown', detectarClick);
+    $('#grilla-pixeles div').on('mousedown', PintarPixel);
+    $('#borrar').on('click', limpiarGrilla);
+}
+
+function limpiarGrilla() {
+    $('#grilla-pixeles div').animate({ 'background-color': '#ffffff' }, 1500);
 }
 
 function detectarClick() {
-    //TODO: RESOLVER SI PUEDO, CON UNA SOLA FUNCION, LOGRAR DETECTAR EL MOUSEUP Y EL MOUSEDOWN
-    console.log(this.onmouseup);
-    /* if (this.onmousedown) {
+    if (event.type === 'mousedown') {
         click = true;
-        console.log(click);
-    } */
+        pintarArrastre();
+    }
+    if (event.type === 'mouseup') {
+        click = false;
+        pintarArrastre();
+    }
 }
 
+function pintarArrastre() {
+    if (click === true) {
+        $('#grilla-pixeles div').on('mouseenter', PintarPixel);
+    }
+    if (click === false) {
+        $('#grilla-pixeles div').off('mouseenter');
+    }
+}
+function eventoSuperHeroe() {
+    //todo: Tratar de modular lo mas eficientemente posible la seleccion del superheroe
+    $('#batman').on('click', cargarSuperheroe);
+}
 function detectarcCambioColor() {
     $('#paleta div').on('click', cambiarColor);
 }
