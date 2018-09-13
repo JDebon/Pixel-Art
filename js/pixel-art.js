@@ -120,8 +120,8 @@ var nombreColores = [
     'DarkSlateGray',
     'Black'
 ];
-var paleta = $('#paleta')[0];
-var grillaPixeles = $('#grilla-pixeles')[0];
+//var paleta = $('#paleta')[0];
+//var grillaPixeles = $('#grilla-pixeles')[0];
 var click = false;
 // Variable para guardar el elemento 'color-personalizado, Es decir, el que se elige con la rueda de color.
 var colorPersonalizado = document.getElementById('color-personalizado');
@@ -131,7 +131,10 @@ $('document').ready(init);
 function init() {
     generarPaleta();
     generarGrilla();
-    eventos();
+    eventosImgs();
+    eventosBotones();
+    eventosGrillaPixeles();
+    eventosPaleta();
 }
 
 colorPersonalizado.addEventListener('change', function() {
@@ -154,21 +157,29 @@ function generarGrilla() {
         var pixel = $('<div>').appendTo('#grilla-pixeles');
     }
 }
-function eventos() {
-    $('#paleta div').on('click', cambiarColor);
+
+function eventosGrillaPixeles() {
     $('#grilla-pixeles div').on('mouseup', detectarClick);
     $('#grilla-pixeles div').on('mousedown', detectarClick);
+    $('#grilla-pixeles').on('mouseleave', detectarClick);
     $('#grilla-pixeles div').on('mousedown', PintarPixel);
+}
+
+function eventosPaleta() {
+    $('#paleta div').on('click', cambiarColor);
+}
+
+function eventosBotones() {
     $('#borrar').on('click', limpiarGrilla);
     $('#guardar').on('click', guardarPixelArt);
-    $('#batman').on('click', definirSuperheroe);
-    $('#wonder').on('click', definirSuperheroe);
-    $('#flash').on('click', definirSuperheroe);
-    $('#invisible').on('click', definirSuperheroe);
+}
+
+function eventosImgs() {
+    $('#batman, #wonder, #flash, #invisible').on('click', definirSuperheroe);
 }
 
 function limpiarGrilla() {
-    $('#grilla-pixeles div').animate({ 'background-color': '#ffffff' }, 1500);
+    $('#grilla-pixeles div').animate({'background-color': '#ffffff'}, 1500);
 }
 
 function detectarClick() {
@@ -176,7 +187,7 @@ function detectarClick() {
         click = true;
         pintarArrastre();
     }
-    if (event.type === 'mouseup') {
+    if (event.type === 'mouseup' || event.type === 'mouseout') {
         click = false;
         pintarArrastre();
     }
@@ -215,7 +226,6 @@ function cambiarColor() {
 }
 
 function PintarPixel() {
-    //CAMBIAR NOMBRE VARIABLE COLORAHORA2
-    var colorAhora2 = $('#indicador-de-color').css('background-color');
-    $(this).css('background-color', colorAhora2);
+    var colorAhora = $('#indicador-de-color').css('background-color');
+    $(this).css('background-color', colorAhora);
 }
