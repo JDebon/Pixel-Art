@@ -126,6 +126,7 @@ main {
 }
 .imgs {
   flex-wrap: wrap;
+  cursor: pointer;
 }
 .imgs li {
   width: 25%;
