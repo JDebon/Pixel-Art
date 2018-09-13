@@ -131,8 +131,7 @@ $('document').ready(init);
 function init() {
     generarPaleta();
     generarGrilla();
-    detectarcCambioColor();
-    eventosPixeles();
+    eventos();
 }
 
 colorPersonalizado.addEventListener('change', function() {
@@ -155,11 +154,17 @@ function generarGrilla() {
         var pixel = $('<div>').appendTo('#grilla-pixeles');
     }
 }
-function eventosPixeles() {
+function eventos() {
+    $('#paleta div').on('click', cambiarColor);
     $('#grilla-pixeles div').on('mouseup', detectarClick);
     $('#grilla-pixeles div').on('mousedown', detectarClick);
     $('#grilla-pixeles div').on('mousedown', PintarPixel);
     $('#borrar').on('click', limpiarGrilla);
+    $('#guardar').on('click', guardarPixelArt);
+    $('#batman').on('click', definirSuperheroe);
+    $('#wonder').on('click', definirSuperheroe);
+    $('#flash').on('click', definirSuperheroe);
+    $('#invisible').on('click', definirSuperheroe);
 }
 
 function limpiarGrilla() {
@@ -185,12 +190,23 @@ function pintarArrastre() {
         $('#grilla-pixeles div').off('mouseenter');
     }
 }
-function eventoSuperHeroe() {
-    //todo: Tratar de modular lo mas eficientemente posible la seleccion del superheroe
-    $('#batman').on('click', cargarSuperheroe);
-}
-function detectarcCambioColor() {
-    $('#paleta div').on('click', cambiarColor);
+
+function definirSuperheroe() {
+    var superheroe = $(this).attr('id');
+    switch (superheroe) {
+        case 'batman':
+            cargarSuperheroe(batman);
+            break;
+        case 'wonder':
+            cargarSuperheroe(wonder);
+            break;
+        case 'flash':
+            cargarSuperheroe(flash);
+            break;
+        case 'invisible':
+            cargarSuperheroe(invisible);
+            break;
+    }
 }
 
 function cambiarColor() {
