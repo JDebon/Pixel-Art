@@ -120,8 +120,8 @@ var nombreColores = [
     'DarkSlateGray',
     'Black'
 ];
-//var paleta = $('#paleta')[0];
-//var grillaPixeles = $('#grilla-pixeles')[0];
+var $paleta = $('#paleta')[0];
+var $grillaPixeles = $('#grilla-pixeles')[0];
 var click = false;
 // Variable para guardar el elemento 'color-personalizado, Es decir, el que se elige con la rueda de color.
 var colorPersonalizado = document.getElementById('color-personalizado');
@@ -146,7 +146,7 @@ colorPersonalizado.addEventListener('change', function() {
 function generarPaleta() {
     for (var i = 0; i < nombreColores.length; i++) {
         var color = nombreColores[i];
-        var casillaPaleta = $('<div>').appendTo('#paleta');
+        var casillaPaleta = $('<div>').appendTo($paleta);
         casillaPaleta.css('background-color', color);
         casillaPaleta.addClass('color-paleta');
     }
@@ -154,15 +154,15 @@ function generarPaleta() {
 
 function generarGrilla() {
     for (var i = 0; i < 1750; i++) {
-        var pixel = $('<div>').appendTo('#grilla-pixeles');
+        var pixel = $('<div>').appendTo($grillaPixeles);
     }
 }
 
 function eventosGrillaPixeles() {
-    $('#grilla-pixeles div').on('mouseup', detectarClick);
-    $('#grilla-pixeles div').on('mousedown', detectarClick);
-    $('#grilla-pixeles').on('mouseleave', detectarClick);
-    $('#grilla-pixeles div').on('mousedown', PintarPixel);
+    $($grillaPixeles.children).on('mouseup', detectarClick);
+    $($grillaPixeles.children).on('mousedown', detectarClick);
+    $($grillaPixeles).on('mouseleave', detectarClick);
+    $($grillaPixeles.children).on('mousedown', PintarPixel);
 }
 
 function eventosPaleta() {
@@ -179,7 +179,7 @@ function eventosImgs() {
 }
 
 function limpiarGrilla() {
-    $('#grilla-pixeles div').animate({'background-color': '#ffffff'}, 1500);
+    $($grillaPixeles.children).animate({'background-color': '#ffffff'}, 1000);
 }
 
 function detectarClick() {
@@ -195,10 +195,10 @@ function detectarClick() {
 
 function pintarArrastre() {
     if (click === true) {
-        $('#grilla-pixeles div').on('mouseenter', PintarPixel);
+        $($grillaPixeles.children).on('mouseenter', PintarPixel);
     }
     if (click === false) {
-        $('#grilla-pixeles div').off('mouseenter');
+        $($grillaPixeles.children).off('mouseenter');
     }
 }
 
