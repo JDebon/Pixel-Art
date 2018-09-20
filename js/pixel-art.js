@@ -120,8 +120,8 @@ var nombreColores = [
     'DarkSlateGray',
     'Black'
 ];
-var $paleta = $('#paleta')[0];
-var $grillaPixeles = $('#grilla-pixeles')[0];
+var $paleta = document.getElementById('paleta');
+var $grillaPixeles = document.getElementById('grilla-pixeles');
 var click = false;
 // Variable para guardar el elemento 'color-personalizado, Es decir, el que se elige con la rueda de color.
 var colorPersonalizado = document.getElementById('color-personalizado');
@@ -154,7 +154,7 @@ function generarPaleta() {
 
 function generarGrilla() {
     for (var i = 0; i < 1750; i++) {
-        var pixel = $('<div>').appendTo($grillaPixeles);
+        $('<div>').appendTo($grillaPixeles);
     }
 }
 
@@ -179,7 +179,7 @@ function eventosImgs() {
 }
 
 function limpiarGrilla() {
-    $($grillaPixeles.children).animate({'background-color': '#ffffff'}, 1000);
+    $($grillaPixeles.children).animate({ 'background-color': '#ffffff' }, 1000);
 }
 
 function detectarClick() {
