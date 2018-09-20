@@ -179,7 +179,7 @@ function eventosImgs() {
 }
 
 function limpiarGrilla() {
-    $($grillaPixeles.children).animate({ 'background-color': '#ffffff' }, 1000);
+    $($grillaPixeles.children).animate({ 'background-color': '#ffffff' }, 1500);
 }
 
 function detectarClick() {
